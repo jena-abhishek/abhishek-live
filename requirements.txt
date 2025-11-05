@@ -1,0 +1,7 @@
+Django>=5.0
+gunicorn
+psycopg2-binary
+Pillow
+whitenoise
+django-cloudinary-storage
+cloudinary
