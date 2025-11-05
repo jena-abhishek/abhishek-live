@@ -93,7 +93,7 @@
   "pk": 1,
   "fields": {
     "title": "Chronoview App",
-    "description": "A time-based data visualization or scheduling tool—clean, modern, and intuitive.",
+    "description": "A time-based data visualization or scheduling toolï¿½clean, modern, and intuitive.",
     "image_url": "https://res.cloudinary.com/dbmt9g4hg/image/upload/v1762368623/chronoview_app_nl3uqk.jpg",
     "technologies": "Django, HTML, CSS, JS",
     "github_url": "http://www.youtube.com",
