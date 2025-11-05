@@ -3,13 +3,14 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-temporary-key-change-in-production')
+# SECURITY WARNING: keep the secret key secret in production!
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-temp-key')
 
-# ✅ CRITICAL: Set DEBUG based on environment
-DEBUG = False  # Must be False for Vercel
+# ✅ On Vercel, DEBUG must be False
+DEBUG = False
 
-# ✅ CRITICAL: Add your Vercel domain
-ALLOWED_HOSTS = ['*']  # For testing, then restrict to your domain
+# ✅ Allow Vercel domain + localhost
+ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -23,7 +24,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',   # ✅ required for static on Vercel
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -37,7 +38,7 @@ ROOT_URLCONF = 'portfolio.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [BASE_DIR / 'templates'],  # ✅ your templates directory
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -52,15 +53,14 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'portfolio.wsgi.application'
 
-# Database
+# ✅ Vercel uses in-memory system DB (persistent DB requires external provider)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': '/tmp/db.sqlite3',  # Vercel uses /tmp
+        'NAME': '/tmp/db.sqlite3',
     }
 }
 
-# Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -73,23 +73,27 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# Static files
+# ✅ Static Files for Vercel + Whitenoise
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+# Where static files will be collected to (Vercel serves from here)
+STATIC_ROOT = BASE_DIR / "staticfiles_build" / "static"
+
+# Where your original static files are located (your working folder)
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# ✅ Add this for better logging
+# ✅ Logging (optional but helpful)
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-        },
+        'console': {'class': 'logging.StreamHandler'},
     },
     'root': {
         'handlers': ['console'],
