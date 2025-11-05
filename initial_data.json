@@ -1,0 +1,121 @@
+[
+{
+  "model": "main.profile",
+  "pk": 1,
+  "fields": {
+    "name": "Abhishek Jena",
+    "tagline": "Full Stack Developer | AIML Enthusiast",
+    "about": "Passionate about creating amazing web experiences with clean code and modern technologies.",
+    "profile_image_url": "https://res.cloudinary.com/dbmt9g4hg/image/upload/v1762367632/IMG-20250419-WA0248_kjxcql.jpg",
+    "cv_file_url": null,
+    "github_url": "https://github.com/jena-abhishek/",
+    "linkedin_url": "http://www.linkedin.com/in/jena-abhishek",
+    "email": "abhishekjena343@gmail.com",
+    "phone": "7605991221",
+    "location": "Bhubaneswar, Odisha, India",
+    "tech_summary_title": "Technical Expertise",
+    "tech_summary": ""
+  }
+},
+{
+  "model": "main.skilltag",
+  "pk": 1,
+  "fields": {
+    "name": "adasdsdasd"
+  }
+},
+{
+  "model": "main.skill",
+  "pk": 1,
+  "fields": {
+    "name": "Django",
+    "description": "Proficient in building robust web applications using Python's popular framework. Experience with MVT architecture, ORM, authentication, and REST APIs.",
+    "proficiency": 80,
+    "skill_type": "technical",
+    "icon": "fab fa-python",
+    "is_featured": true,
+    "tags": [
+      1
+    ]
+  }
+},
+{
+  "model": "main.education",
+  "pk": 1,
+  "fields": {
+    "degree": "10th",
+    "institution": "Carmel English Medium School",
+    "location": "Khordha, Odisha, India",
+    "start_date": null,
+    "end_date": null,
+    "grade": "88%",
+    "description": "Completed Secondary education with excellent academic performance. Developed strong foundation in core subjects including Mathematics, Science, and English communication.",
+    "is_current": false
+  }
+},
+{
+  "model": "main.education",
+  "pk": 2,
+  "fields": {
+    "degree": "12th",
+    "institution": "ODM Public School",
+    "location": "Patia, Bhubaneswar, Odisha",
+    "start_date": null,
+    "end_date": null,
+    "grade": "78%",
+    "description": "Completed Higher Secondary education with Science stream, focusing on Mathematics, Physics, and Chemistry. Built strong analytical and problem-solving foundation for engineering studies.",
+    "is_current": false
+  }
+},
+{
+  "model": "main.education",
+  "pk": 3,
+  "fields": {
+    "degree": "B.Tech",
+    "institution": "GITA Autonomous College",
+    "location": "BBSR, Odisha",
+    "start_date": null,
+    "end_date": "2025-07-01",
+    "grade": "9.0 CGPA",
+    "description": "asddadadadxcsdfsdgergrere",
+    "is_current": false
+  }
+},
+{
+  "model": "main.projecttag",
+  "pk": 1,
+  "fields": {
+    "name": "asdafasgdasgdgha"
+  }
+},
+{
+  "model": "main.project",
+  "pk": 1,
+  "fields": {
+    "title": "Chronoview App",
+    "description": "A time-based data visualization or scheduling tool—clean, modern, and intuitive.",
+    "image_url": "https://res.cloudinary.com/dbmt9g4hg/image/upload/v1762368623/chronoview_app_nl3uqk.jpg",
+    "technologies": "Django, HTML, CSS, JS",
+    "github_url": "http://www.youtube.com",
+    "live_url": "http://www.youtube.com",
+    "start_date": null,
+    "end_date": null,
+    "is_featured": true,
+    "tags": [
+      1
+    ]
+  }
+},
+{
+  "model": "main.contact",
+  "pk": 1,
+  "fields": {
+    "name": "Abhishek Jnea",
+    "email": "asdfghjkl@gmail.com",
+    "phone": "123456780",
+    "message": "dfdfdfdf",
+    "created_at": "2025-11-05T14:19:44.681Z",
+    "is_read": false
+  }
+}
+]
