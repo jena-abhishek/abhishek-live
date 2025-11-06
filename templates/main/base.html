@@ -45,7 +45,7 @@
 
                 <li class="nav-item"><a class="nav-link" href="{% url 'main:home' %}">Home</a></li>
 
-                <li class="nav-item"><a class="nav-link" href="{% url 'main:home' %}#about">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'main:home' %}#home">About</a></li>
 
                 <li class="nav-item"><a class="nav-link" href="{% url 'main:home' %}#education">Education</a></li>
 
@@ -159,6 +159,59 @@ var swiper = new Swiper(".mySwiper", {
 });
 </script>
 
+<script>
+(function() {
+
+  const HOME = "{% url 'main:home' %}".replace(/\/+$/, "") || "/";
+  const nav = document.querySelector('.custom-navbar');
+  const NAV_H = nav ? nav.offsetHeight : 0;
+
+  function smoothScrollToSection(id) {
+    const section = document.getElementById(id);
+    if (!section) return;
+    const offset = section.getBoundingClientRect().top + window.pageYOffset - (NAV_H + 10);
+    window.scrollTo({ top: offset, behavior: "smooth" });
+  }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    // ✅ Auto-scroll if opened with #hash
+    if (window.location.hash) {
+      const id = window.location.hash.substring(1);
+      setTimeout(() => smoothScrollToSection(id), 200);
+    }
+  });
+
+  document.querySelectorAll('a.nav-link[href*="#"]').forEach(link => {
+    link.addEventListener('click', function(e) {
+      const url = new URL(this.href, window.location.origin);
+      const hash = url.hash;
+      if (!hash) return;
+
+      const id = hash.substring(1);
+
+      const current = window.location.pathname.replace(/\/+$/, "");
+
+      // ✅ If NOT on home → go to home + hash
+      if (current !== HOME) {
+        e.preventDefault();
+        window.location.href = HOME + hash;
+        return;
+      }
+
+      // ✅ Already on home → smooth scroll
+      e.preventDefault();
+      smoothScrollToSection(id);
+
+      // ✅ Close mobile menu
+      const navCollapse = document.getElementById("navbarNav");
+      if (navCollapse && navCollapse.classList.contains("show") && window.bootstrap) {
+        new bootstrap.Collapse(navCollapse).hide();
+      }
+    });
+  });
+
+})();
+</script>
 
 
 </body>

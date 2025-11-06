@@ -113,8 +113,12 @@
 <!-- ===== FEATURED PROJECTS SLIDER ===== -->
 <section id="projects" class="py-5">
   <div class="container">
-    <h2 class="section-title text-center mb-4">Featured Projects</h2>
 
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 class="section-title text-center mb-4">Featured Projects</h2>
+      <a href="{% url 'main:projects_list' %}" class="btn btn-outline-primary">See all projects</a>
+    </div>
+    
     <div class="swiper mySwiper">
       <div class="swiper-wrapper">
 
