@@ -1121,3 +1121,79 @@ section .container{
 .swiper-wrapper {
   transition-timing-function: cubic-bezier(.25, .8, .25, 1) !important;
 }
+/* =========================
+   MOBILE FIX FOR PROJECT SLIDER
+   ========================= */
+@media (max-width: 768px) {
+
+  /* Make project card stack vertically */
+  .project-card {
+    flex-direction: column !important;
+    text-align: center !important;
+    padding: 24px !important;
+  }
+
+  /* Fix image size / keep beautiful ratio */
+  .project-slide-img {
+    width: 100% !important;
+    height: auto !important;
+    max-height: 220px !important;
+    object-fit: cover !important;
+    border-radius: 14px !important;
+    margin-bottom: 16px !important;
+  }
+
+  /* Center project text */
+  .project-content {
+    margin-left: 0 !important;
+    margin-top: 12px !important;
+  }
+
+  /* Space for tech badges */
+  .badge-tech {
+    margin-bottom: 6px !important;
+  }
+
+  /* Align GitHub / Demo buttons nicely */
+  .project-links {
+    justify-content: center !important;
+  }
+
+  /* Reduce width of swiper arrows so they don't overlap */
+  .swiper-button-next,
+  .swiper-button-prev {
+    transform: scale(0.7);
+  }
+}
+
+/* Extra for very small screens (<450px) */
+@media (max-width: 450px) {
+  .project-card {
+    border-radius: 16px;
+    padding: 18px !important;
+  }
+}
+/* ==== MOBILE HERO FIX ==== */
+@media (max-width: 768px) {
+
+  /* Center hero content */
+  #home .row {
+    text-align: center;
+    flex-direction: column;
+  }
+
+  /* Space between buttons and image */
+  .project-links {
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  /* Profile image resizing + centering */
+  .hero-image {
+    margin: 20px auto 0 auto; /* top spacing + center */
+    width: 200px !important;
+    height: 200px !important;
+    object-fit: cover;
+    display: block;
+  }
+}
