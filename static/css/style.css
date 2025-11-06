@@ -1397,3 +1397,48 @@ section { scroll-margin-top: 90px; } /* tweak 80–110px if needed */
     font-size: 0.9rem;
   }
 }
+/* Align Featured Skills & Featured Projects titles perfectly */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+
+/* Remove extra spacing caused by display:inline-block */
+.section-header .section-title {
+  margin-bottom: 0 !important;
+  display: block !important;
+}
+
+/* Mobile fix: ensure no left-shift happens */
+@media (max-width: 768px) {
+  #skills .section-header,
+  #projects .section-header {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .section-title {
+    text-align: left !important;
+  }
+}
+/* Make section header buttons same size and style */
+.section-header .btn {
+  padding: 10px 26px !important;
+  border-radius: 40px !important;
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.2;
+  border: 1.8px solid #2575fc !important;
+  color: #2575fc !important;
+  background: transparent !important;
+  transition: 0.3s ease;
+}
+
+/* Hover effect */
+.section-header .btn:hover {
+  background: rgba(37,117,252,0.12) !important;
+  transform: translateY(-3px);
+}
