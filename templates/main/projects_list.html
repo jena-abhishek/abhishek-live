@@ -11,13 +11,9 @@
 
         <div class="project-card glass-card h-100 d-flex flex-column">
 
-          {% if p.image_url %}
+          {% if p.image %}
           <div class="project-image-wrapper-full">
-            <img src="{{ p.image_url }}" alt="{{ p.title }}">
-          </div>
-          {% else %}
-          <div class="project-image-wrapper-full">
-            <img src="https://res.cloudinary.com/demo/image/upload/v1/sample.jpg" alt="{{ p.title }}">
+            <img src="{{ p.image }}" alt="{{ p.title }}">
           </div>
           {% endif %}
 
@@ -30,24 +26,21 @@
               {% for tech in p.tech_list %}
               <span class="badge tag-badge">{{ tech }}</span>
               {% endfor %}
-
               {% for tag in p.tags.all %}
               <span class="badge tag-badge">{{ tag.name }}</span>
               {% endfor %}
             </div>
 
-            <!-- ✅ Clean GitHub + Demo Links -->
             <div class="project-links mt-3">
               {% if p.github_url %}
               <a href="{{ p.github_url }}" target="_blank" class="project-link">
                 <i class="fa-brands fa-github"></i> GitHub
               </a>
               {% endif %}
-
               {% if p.live_url %}
               <a href="{{ p.live_url }}" target="_blank" class="project-link">
                 <i class="fa-brands fa-linkedin"></i> Demo
-                </a>
+              </a>
               {% endif %}
             </div>
 
@@ -55,8 +48,6 @@
         </div>
 
       </div>
-      {% empty %}
-      <p>No projects added yet.</p>
       {% endfor %}
     </div>
   </div>

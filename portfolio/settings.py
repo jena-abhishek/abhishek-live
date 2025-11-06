@@ -1,102 +1,146 @@
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv()  # for loading .env variables
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# SECURITY WARNING: keep the secret key secret in production!
-SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-temp-key')
 
-# ✅ On Vercel, DEBUG must be False
-DEBUG = False
+# ==============================
+# SECURITY
+# ==============================
+SECRET_KEY = os.getenv("SECRET_KEY", "your-secret-key")
+DEBUG = True  # Change to False in production
+ALLOWED_HOSTS = ["*"]   # You can limit later when deploying
 
-# ✅ Allow Vercel domain + localhost
-ALLOWED_HOSTS = ['*']
 
+# ==============================
+# INSTALLED APPS
+# ==============================
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'main',
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+
+    # Your app
+    "main",
+
+    # Cloudinary
+    "cloudinary",
+    "cloudinary_storage",
 ]
 
+
+# ==============================
+# MIDDLEWARE
+# ==============================
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',   # ✅ required for static on Vercel
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django.middleware.security.SecurityMiddleware",
+
+    # Whitenoise (serves static files in deployment)
+    "whitenoise.middleware.WhiteNoiseMiddleware",
+
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = 'portfolio.urls'
 
+# ==============================
+# URL & WSGI
+# ==============================
+ROOT_URLCONF = "portfolio.urls"
+WSGI_APPLICATION = "portfolio.wsgi.application"
+
+
+# ==============================
+# DATABASE (SQLite — Keep Same)
+# ==============================
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
+}
+
+
+# ==============================
+# TEMPLATES
+# ==============================
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],  # ✅ your templates directory
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [BASE_DIR / "templates"],  # ✅ ensure templates folder used
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'portfolio.wsgi.application'
 
-# ✅ Vercel uses in-memory system DB (persistent DB requires external provider)
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': '/tmp/db.sqlite3',
-    }
-}
-
+# ==============================
+# PASSWORDS
+# ==============================
 AUTH_PASSWORD_VALIDATORS = [
-    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
+    {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",},
+    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",},
+    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",},
+    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",},
 ]
 
-LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'UTC'
+
+# ==============================
+# INTERNATIONALIZATION
+# ==============================
+LANGUAGE_CODE = "en-us"
+TIME_ZONE = "Asia/Kolkata"
 USE_I18N = True
 USE_TZ = True
 
-# ✅ Static Files for Vercel + Whitenoise
-STATIC_URL = '/static/'
 
-# Where static files will be collected to (Vercel serves from here)
-STATIC_ROOT = BASE_DIR / "staticfiles_build" / "static"
+# ==============================
+# STATIC FILES (CSS, JS)
+# ==============================
+STATIC_URL = "/static/"
+STATICFILES_DIRS = [BASE_DIR / "static"]
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
-# Where your original static files are located (your working folder)
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
+# Whitenoise compression
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# ==============================
+# MEDIA FILES (NOW ON CLOUDINARY)
+# ==============================
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
-# ✅ Logging (optional but helpful)
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'console': {'class': 'logging.StreamHandler'},
-    },
-    'root': {
-        'handlers': ['console'],
-        'level': 'INFO',
-    },
+CLOUDINARY_STORAGE = {
+    "CLOUD_NAME": os.getenv("CLOUD_NAME"),
+    "API_KEY": os.getenv("API_KEY"),
+    "API_SECRET": os.getenv("API_SECRET"),
 }
+
+DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
+
+MEDIA_URL = "/media/"
+
+
+# ==============================
+# DEFAULT PRIMARY KEY FIELD TYPE
+# ==============================
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

@@ -1,24 +1,25 @@
 from django.db import models
 from django.core.validators import RegexValidator
 
+
 # ---------- Profile ----------
 class Profile(models.Model):
     name = models.CharField(max_length=100, default="Your Name")
     tagline = models.CharField(max_length=200, default="Full Stack Developer")
     about = models.TextField(blank=True)
-    
-    # ✅ Changed to URLField for Cloudinary
-    profile_image_url = models.URLField(blank=True, null=True, help_text="Cloudinary image URL")
-    cv_file_url = models.URLField(blank=True, null=True, help_text="Cloudinary CV URL")
 
-    # Social
+    # ✅ Now using URLField instead of file upload
+    profile_image = models.URLField(blank=True, null=True, help_text="Paste Cloudinary Image URL")
+
+    # CV file (optional paste link)
+    cv_file = models.URLField(blank=True, null=True, help_text="Paste your CV Google Drive/Cloud link")
+
     github_url = models.URLField(blank=True, null=True)
     linkedin_url = models.URLField(blank=True, null=True)
     email = models.EmailField(blank=True, null=True)
     phone = models.CharField(max_length=20, blank=True, null=True)
     location = models.CharField(max_length=100, blank=True, null=True)
 
-    # Technical expertise summary
     tech_summary_title = models.CharField(max_length=120, default="Technical Expertise")
     tech_summary = models.TextField(blank=True)
 
@@ -29,9 +30,9 @@ class Profile(models.Model):
 # ---------- Skills ----------
 class SkillTag(models.Model):
     name = models.CharField(max_length=40, unique=True)
-
     def __str__(self):
         return self.name
+
 
 class Skill(models.Model):
     SKILL_TYPES = [
@@ -43,7 +44,7 @@ class Skill(models.Model):
     description = models.TextField(blank=True)
     proficiency = models.PositiveIntegerField(default=80)
     skill_type = models.CharField(max_length=20, choices=SKILL_TYPES, default='technical')
-    icon = models.CharField(max_length=50, blank=True, help_text="Icon class (e.g. fab fa-python)")
+    icon = models.CharField(max_length=50, blank=True)
     tags = models.ManyToManyField(SkillTag, blank=True, related_name='skills')
     is_featured = models.BooleanField(default=False)
 
@@ -78,19 +79,20 @@ class ProjectTag(models.Model):
     def __str__(self):
         return self.name
 
+
 class Project(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
-    
-    # ✅ Changed to URLField for Cloudinary
-    image_url = models.URLField(blank=True, null=True, help_text="Cloudinary image URL")
-    
-    technologies = models.CharField(max_length=300, help_text="Comma-separated or keep blank", blank=True)
+
+    # ✅ Now using URLField instead of image upload
+    image = models.URLField(blank=True, null=True, help_text="Paste Cloudinary Image URL")
+
+    technologies = models.CharField(max_length=300, blank=True)
     tags = models.ManyToManyField(ProjectTag, blank=True, related_name='projects')
     github_url = models.URLField(blank=True, null=True)
     live_url = models.URLField(blank=True, null=True)
     start_date = models.DateField(blank=True, null=True)
-    end_date = models.DateField(null=True, blank=True)
+    end_date = models.DateField(blank=True, null=True)
     is_featured = models.BooleanField(default=False)
 
     class Meta:
