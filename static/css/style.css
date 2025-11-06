@@ -899,3 +899,225 @@ section .container{
   to { transform: translateX(50px); opacity: 0; }
 }
 
+.project-slide-img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 14px;
+}
+
+.swiper {
+  padding: 20px 0;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: #fff;
+  transition: 0.3s;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  color: #0d6efd;
+}
+
+.swiper-pagination-bullet-active {
+  background: #0d6efd;
+}
+
+/* ================================
+   FIX: PROJECT SLIDER IMAGE SIZING
+   (no crop + cleaner height)
+================================ */
+
+/* Reduce the big card height & spacing */
+.project-card.glass-card,
+.project-card {
+  padding: 20px !important;
+  border-radius: 18px;
+}
+
+/* Show entire image without cutting/cropping */
+.project-image-wrapper-full img {
+  width: 100%;
+  max-height: 260px;         /* ↓ adjust this only if needed */
+  object-fit: contain !important;   /* ✅ prevents cropping */
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.05);
+  padding: 6px;
+}
+
+/* Bring content closer so card doesn't look too tall */
+.project-content {
+  padding-top: 14px !important;
+}
+
+/* Make the slide container slightly shorter */
+.swiper {
+  padding-top: 10px !important;
+  padding-bottom: 30px !important;
+}
+
+/* Make arrows scale nicely + visible */
+.swiper-button-next,
+.swiper-button-prev {
+  color: #ffffff !important;
+  scale: 0.9;
+  transition: 0.3s ease;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  color: #7bd7ff !important;
+  scale: 1;
+}
+/* =========================================
+   FIX PROJECT SLIDER WIDTH + IMAGE ASPECT
+   ========================================= */
+
+/* ✅ Make the project card fit inside arrow bounds */
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+}
+
+.project-card {
+  width: 88%;              /* adjust card width */
+  margin: 0 auto;
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+/* ✅ 16:9 Perfect Aspect Ratio */
+.project-image-wrapper-full {
+  position: relative;
+  width: 100%;
+}
+
+.project-image-wrapper-full::before {
+  content: "";
+  display: block;
+  padding-top: 56.25%;     /* 16:9 ratio = 9/16 = 0.5625 */
+}
+
+.project-image-wrapper-full img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;     /* Full image, no cropping */
+  background: rgba(255,255,255,0.05);
+  border-radius: 14px;
+  padding: 6px;
+  border: 1px solid rgba(255,255,255,0.25);
+}
+
+/* ✅ Adjust slider spacing cleanly */
+.swiper {
+  padding-top: 30px;
+  padding-bottom: 40px;
+}
+
+/* ✅ Arrow position improved */
+.swiper-button-next,
+.swiper-button-prev {
+  top: 45%;
+  color: #fff;
+  font-size: 22px;
+  scale: 0.9;
+  transition: 0.25s;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  scale: 1.1;
+  color: #7bd7ff;
+}
+/* =========================================
+   PROJECT SLIDER — HEIGHT + CARD WIDTH TUNE
+   ========================================= */
+
+/* Decrease the card width from corners (balanced) */
+.project-card {
+  width: 84% !important;   /* Adjust 82%–88% as per taste */
+  margin: 0 auto;
+}
+
+/* Increase image height slightly while keeping it clean */
+.project-image-wrapper-full img {
+  max-height: 310px !important;  /* Adjust 290px or 330px if needed */
+  object-fit: contain !important;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.05);
+  padding: 6px;
+  border: 1px solid rgba(255,255,255,0.25);
+}
+
+/* Ensure the 16:9 aspect ratio stays exact */
+.project-image-wrapper-full {
+  position: relative;
+  width: 100%;
+}
+
+.project-image-wrapper-full::before {
+  content: "";
+  display: block;
+  padding-top: 56.25%; /* 16:9 ratio */
+}
+
+/* Re-align toggle arrows cleanly */
+.swiper-button-next,
+.swiper-button-prev {
+  top: 45%;
+  color: #ffffff !important;
+  scale: 0.9;
+  transition: 0.25s ease;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  scale: 1.1;
+  color: #7bd7ff !important;
+}
+/* =========================================
+   PROJECT SLIDER: BUTTONS BESIDE IMAGE
+   ========================================= */
+
+/* Make project card split into 2 columns */
+.project-card.d-flex {
+  flex-direction: row; /* horizontal layout */
+  align-items: center;
+  gap: 24px; /* spacing between image and text */
+}
+
+/* Image column stays same */
+.project-image-wrapper-full {
+  flex: 1; /* takes half width */
+}
+
+/* Content column becomes vertical */
+.project-content {
+  flex: 1; /* takes other half width */
+  text-align: left !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Buttons appear directly under title, not bottom */
+.project-links {
+  margin-top: 16px;
+  display: flex;
+  gap: 18px;
+}
+
+/* Make sure the slide still centers cleanly */
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+}
+/* Smooth slide glide effect */
+.swiper-wrapper {
+  transition-timing-function: cubic-bezier(.25, .8, .25, 1) !important;
+}

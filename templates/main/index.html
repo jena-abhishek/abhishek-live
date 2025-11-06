@@ -40,7 +40,7 @@
 </section>
 
 
-<!-- ===== EDUCATION SECTION ===== -->
+<!-- ===== EDUCATION ===== -->
 <section id="education">
   <div class="container">
     <h2 class="section-title">Education</h2>
@@ -71,7 +71,7 @@
 </section>
 
 
-<!-- ===== FEATURED SKILLS SECTION ===== -->
+<!-- ===== FEATURED SKILLS ===== -->
 <section id="skills">
   <div class="container">
     <div class="d-flex justify-content-between align-items-center">
@@ -82,7 +82,6 @@
     <div class="row mt-4">
       {% for s in featured_skills %}
       <div class="col-lg-6 mb-4" data-aos="fade-up">
-
         <div class="skill-card-interactive h-100">
           <div class="d-flex justify-content-between align-items-center mb-2">
             <div class="d-flex align-items-center gap-2">
@@ -102,7 +101,6 @@
           </div>
           {% endif %}
         </div>
-
       </div>
       {% empty %}
       <p>No featured skills yet.</p>
@@ -112,62 +110,63 @@
 </section>
 
 
-<!-- ===== FEATURED PROJECTS SECTION ===== -->
+<!-- ===== FEATURED PROJECTS SLIDER ===== -->
 <section id="projects" class="py-5">
   <div class="container">
-    <div class="d-flex justify-content-between align-items-center">
-      <h2 class="section-title">Featured Projects</h2>
-      <a href="{% url 'main:projects_list' %}" class="btn btn-outline-primary">See all projects</a>
-    </div>
+    <h2 class="section-title text-center mb-4">Featured Projects</h2>
 
-    <div class="row mt-4">
-      {% for p in featured_projects %}
-      <div class="col-lg-6 mb-4" data-aos="fade-up">
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
 
-        <div class="project-card d-flex align-items-center gap-3">
+        {% for p in featured_projects %}
+        <div class="swiper-slide">
+          <div class="project-card glass-card p-4 d-flex align-items-center">
 
-          {% if p.image %}
-          <div class="project-image-wrapper">
-            <img src="{{ p.image }}" alt="{{ p.title }}">
-          </div>
-          {% endif %}
-
-          <div class="project-content flex-grow-1">
-            <h4>{{ p.title }}</h4>
-            <p>{{ p.description }}</p>
-
-            <div class="mt-2">
-              {% for t in p.tech_list %}
-              <span class="badge-tech">{{ t }}</span>
-              {% endfor %}
+            <div class="project-image-wrapper-full">
+              {% if p.image %}
+              <img src="{{ p.image }}" class="project-slide-img" alt="{{ p.title }}">
+              {% endif %}
             </div>
 
-            <div class="project-links mt-3">
-              {% if p.github_url %}
-              <a href="{{ p.github_url }}" target="_blank" class="project-link">
-                <i class="fa-brands fa-github"></i> GitHub
-              </a>
-              {% endif %}
-              {% if p.live_url %}
-              <a href="{{ p.live_url }}" target="_blank" class="project-link">
-                <i class="fa-solid fa-arrow-up-right-from-square"></i> Demo
-              </a>
-              {% endif %}
+            <div class="project-content ms-4">
+              <h3>{{ p.title }}</h3>
+              <p>{{ p.description }}</p>
+
+              <div class="mt-2">
+                {% for t in p.tech_list %}
+                <span class="badge-tech">{{ t }}</span>
+                {% endfor %}
+              </div>
+
+              <div class="project-links mt-3">
+                {% if p.github_url %}
+                <a href="{{ p.github_url }}" class="project-link" target="_blank">
+                  <i class="fa-brands fa-github"></i> GitHub
+                </a>
+                {% endif %}
+                {% if p.live_url %}
+                <a href="{{ p.live_url }}" class="project-link" target="_blank">
+                  <i class="fa-solid fa-arrow-up-right-from-square"></i> Demo
+                </a>
+                {% endif %}
+              </div>
             </div>
 
           </div>
         </div>
+        {% endfor %}
 
       </div>
-      {% empty %}
-      <p>No featured projects yet.</p>
-      {% endfor %}
+
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-pagination"></div>
     </div>
   </div>
 </section>
 
 
-<!-- ===== CONTACT SECTION ===== -->
+<!-- ===== CONTACT ===== -->
 <section id="contact" class="py-5">
   <div class="container">
     <h2 class="section-title text-center">Get In Touch</h2>
@@ -179,29 +178,28 @@
       <div class="row g-3">
         <div class="col-md-6">
           <label class="form-label">Full Name</label>
-          <input type="text" name="name" class="form-control form-input" required>
+          <input type="text" name="name" class="form-input" placeholder="Enter your full name" required>
         </div>
 
         <div class="col-md-6">
           <label class="form-label">Email Address</label>
-          <input type="email" name="email" class="form-control form-input" required>
+          <input type="email" name="email" class="form-input" placeholder="Enter your email address" required>
         </div>
 
         <div class="col-12">
           <label class="form-label">Phone Number</label>
-          <input type="text" name="phone" class="form-control form-input">
+          <input type="text" name="phone" class="form-input" placeholder="Add your phone number">
         </div>
 
         <div class="col-12">
           <label class="form-label">Message</label>
-          <textarea name="message" rows="5" class="form-control form-input" required></textarea>
+          <textarea name="message" rows="5" class="form-input" placeholder="Write your message here..." required></textarea>
         </div>
       </div>
 
       <button type="submit" class="send-btn mt-4">
         <i class="fa-solid fa-paper-plane"></i> Send Message
       </button>
-
     </form>
   </div>
 </section>
