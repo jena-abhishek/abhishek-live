@@ -1275,3 +1275,125 @@ section { scroll-margin-top: 90px; } /* tweak 80–110px if needed */
         font-size: 16px !important;
     }
 }
+/* ------------------------------
+   🟣 Fix Featured Projects Header Alignment (Mobile)
+--------------------------------*/
+@media (max-width: 768px) {
+  #projects .d-flex {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  #projects h2.section-title {
+    margin-bottom: 0;
+  }
+
+  #projects .btn {
+    margin-top: 0 !important;
+  }
+}
+
+/* ------------------------------
+   🟣 Make Swiper Project Slide Centered on Mobile
+--------------------------------*/
+@media (max-width: 768px) {
+  .mySwiper .swiper-slide {
+    display: flex;
+    justify-content: center;
+  }
+
+  .project-card {
+    width: 95%;
+    margin: 0 auto;
+  }
+}
+
+/* ------------------------------
+   🟣 Ensure Featured Projects Section Aligns Left Like Others
+--------------------------------*/
+@media (max-width: 768px) {
+  #projects .container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+}
+
+/* ------------------------------
+   🟣 Move Back-To-Top Button Above Project Box
+--------------------------------*/
+#btn-back-to-top {
+  z-index: 9999 !important;
+  bottom: 22px !important;
+  right: 22px !important;
+}
+
+/* Ensure swiper arrows don't overlap */
+.swiper-button-next,
+.swiper-button-prev {
+  z-index: 50 !important;
+}
+/* Keep title and button on the same line (no wrapping) */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+
+/* Fix spacing consistency */
+.section-header h2.section-title {
+  margin-bottom: 0;
+}
+
+/* Ensure proper layout on mobile */
+@media (max-width: 768px) {
+  .section-header {
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+  }
+}
+/* Fix button alignment next to section titles */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* <– forces same vertical line */
+  width: 100%;
+  margin-bottom: 2rem; /* keeps spacing after the header */
+}
+
+/* Remove the big bottom margin from title only in header rows */
+.section-header .section-title {
+  margin-bottom: 0 !important;
+}
+/* Fix underline bar pushing title downward in section headers */
+.section-header .section-title::after {
+  margin-top: 0 !important;
+  position: absolute;
+  bottom: -6px; /* keeps the bar visually below the title */
+}
+/* Keep Skills and Projects headers perfectly aligned */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.section-header .section-title {
+  margin-bottom: 0 !important;
+}
+
+/* Mobile Fix */
+@media (max-width: 768px) {
+  .section-header {
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+  .section-header .btn {
+    margin: 0 !important;
+    padding: 8px 18px;
+    font-size: 0.9rem;
+  }
+}
