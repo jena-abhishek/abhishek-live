@@ -1442,3 +1442,6 @@ section { scroll-margin-top: 90px; } /* tweak 80–110px if needed */
   background: rgba(37,117,252,0.12) !important;
   transform: translateY(-3px);
 }
+.class-degre {
+  color: #ffffff !important;
+}
